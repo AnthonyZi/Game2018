@@ -1,0 +1,5 @@
+python_requirements:
+
+future==0.16.0
+numpy==1.15.1
+pyglet==1.3.2

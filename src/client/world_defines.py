@@ -1,0 +1,2 @@
+WPLAYER = "P"
+WWALL   = "W"
