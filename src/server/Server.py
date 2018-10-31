@@ -66,8 +66,7 @@ class Server(object):
     def initialise(self):
         self.start_socket()
         self.connect_all_clients()
-        self.game.new_game()
-        self.game.start_game()
+        self.game.ready = True
 
     def broadcast_content(self,nongame_content=None,game_content=None):
         for c in self.clients:

@@ -44,6 +44,8 @@ class Client(threading.Thread):
         self.mapdata = None
         self.ready = False
 
+        self.player_obj = None
+
     def get_playername(self):
         return self.playername if self.playername is not "" else self.address
 
@@ -79,6 +81,7 @@ class Client(threading.Thread):
             data = self.connection.recv(1024)
             if not data:
                 print("lost connection to client {}".format(self.get_playername()))
+                self.server.game.playing = False
                 self.running = False
                 break
             data = data.decode()

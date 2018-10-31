@@ -1,15 +1,18 @@
 TITLE                   = "my game"
-WIDTH                   = 1200
-HEIGHT                  = 800
-FPS                     = 30
-TILESIZE                = 32
-CHUNKSIZE               = 10
+WIDTH                   = int(1200)
+HEIGHT                  = int(800)
+FPS                     = 50
+TILESIZE                = int(32)
+CHUNKSIZE               = int(10)
 
-PLAYER_STEPS_PER_TILE   = 6
+CHARACTER_WALK_SPEED    = 4 # tiles per second
 
-# object images
-IMG_WALL                = "res/wall.png"
-IMG_PLAYER              = "res/player.png"
 
 # network settings
 PACKET_DELIMITER        = ":#END:#"
+PLAYERNAME              = "Assax"
+SERVER_ADDRESS          = "localhost"
+SERVER_PORT             = 54321
+
+# graphical settings
+NUM_LAYERS              = 4

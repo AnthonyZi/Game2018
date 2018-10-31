@@ -1,8 +1,11 @@
+import sys
+
 import threading
 import socket
 import queue
 import json
 from collections import defaultdict
+from collections import deque
 
 from settings import *
 
@@ -36,7 +39,7 @@ class Client(threading.Thread):
         self.playername     = configuration["playername"]
 
         self.send_queue = queue.Queue()
-        self.recv_queue = queue.Queue()
+        self.recv_queue = deque()
 
         self.packet_buffer = []
 
@@ -48,12 +51,16 @@ class Client(threading.Thread):
         self.num_players = 0
         self.mapdata = None
 
+    def close(self):
+        self.running = False
+        self.sock.shutdown(socket.SHUT_RDWR)
+
     def connect_socket(self):
         try:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.sock.connect((self.server_ip,self.server_port))
         except socket.error:
             print("Failed to create socket")
-        self.sock.connect((self.server_ip,self.server_port))
 
     def packet_complete(self,packet):
         return packet.endswith(PACKET_DELIMITER)
@@ -123,7 +130,7 @@ class Client(threading.Thread):
         while self.running:
             packet_content = self.receive_packet()
             if packet_content is not None:
-                self.recv_queue.put(packet_content)
+                self.recv_queue.append(packet_content)
 
         sthread.close()
         sthread.join()

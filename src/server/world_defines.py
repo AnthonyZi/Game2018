@@ -1,2 +1,5 @@
+WIGNORE = "%"
+WGROUND = "."
 WPLAYER = "P"
+WENEMY  = "E"
 WWALL   = "W"
